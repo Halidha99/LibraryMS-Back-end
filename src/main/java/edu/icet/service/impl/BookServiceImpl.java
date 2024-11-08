@@ -1,8 +1,9 @@
-package edu.icet.service;
+package edu.icet.service.impl;
 
 import edu.icet.dto.Book;
 import edu.icet.entity.BookEntity;
 import edu.icet.repository.BookRepository;
+import edu.icet.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

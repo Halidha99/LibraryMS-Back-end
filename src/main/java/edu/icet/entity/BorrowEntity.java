@@ -33,6 +33,7 @@ public class BorrowEntity {
     @Temporal(TemporalType.DATE)
     private Date dueDate;
 
+
     private double fine;
 
 }

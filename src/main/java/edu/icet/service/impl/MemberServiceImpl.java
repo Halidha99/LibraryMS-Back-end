@@ -1,10 +1,11 @@
-package edu.icet.service;
+package edu.icet.service.impl;
 
 
 import edu.icet.dto.Member;
 
 import edu.icet.entity.MemberEntity;
 import edu.icet.repository.MemberRepository;
+import edu.icet.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 
