@@ -1,8 +1,7 @@
 package edu.icet.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import edu.icet.dto.Book;
-import edu.icet.dto.Member;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,14 +16,19 @@ import java.util.Date;
 public class BorrowEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private   Integer borrowId;
-    private Integer id;
-    private Integer memberId;
+    private Integer borrowId;
 
+    @ManyToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+    private BookEntity book;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    private MemberEntity member;
 
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="yyyy-MM-dd")
-    private  Date issueDate;
+    private Date issueDate;
 
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="yyyy-MM-dd")
@@ -32,7 +36,6 @@ public class BorrowEntity {
 
     @Temporal(TemporalType.DATE)
     private Date dueDate;
-
 
     private double fine;
 

@@ -9,5 +9,6 @@ public interface BorrowService {
     void addBorrow(Borrow borrow);
 
     void updateBorrow(Borrow borrow);
+    void returnBorrowBook(Integer borrowId);
 
 }

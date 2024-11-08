@@ -3,6 +3,8 @@ package edu.icet.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +23,20 @@ public class BookEntity {
     private String authorName;
     private String category;
     private Integer qty;
+
+//    @OneToMany(mappedBy = "book")
+//    private Set<BorrowEntity> borrowEntities;
+
+    public void borrowBook() {
+        if (this.qty > 0) {
+            this.qty--;
+        } else {
+            throw new IllegalStateException("No copies available to borrow.");
+        }
+    }
+
+
+    public void returnBook() {
+        this.qty++;
+    }
 }
