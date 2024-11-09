@@ -35,12 +35,12 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public void addBorrow(Borrow borrow) {
-        if (borrow == null) {
-            throw new IllegalArgumentException("Borrow object cannot be null");
-        }
-        if (borrow.getBook() == null || borrow.getMember() == null) {
-            throw new IllegalArgumentException("Book and Member must be provided");
-        }
+//        if (borrow == null) {
+//            throw new IllegalArgumentException("Borrow object cannot be null");
+//        }
+//        if (borrow.getBook() == null || borrow.getMember() == null) {
+//            throw new IllegalArgumentException("Book and Member must be provided");
+//        }
 
         BookEntity bookEntity = repository.findById(borrow.getBook().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Book not found with ID: " + borrow.getBook().getId()));
@@ -48,21 +48,17 @@ public class BorrowServiceImpl implements BorrowService {
         MemberEntity memberEntity = memberRepository.findById(borrow.getMember().getMemberId())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + borrow.getMember().getMemberId()));
 
-
         if (bookEntity.getQty() > 0) {
             bookEntity.setQty(bookEntity.getQty() - 1);
             repository.save(bookEntity);
 
-
             BorrowEntity borrowEntity = mapper.map(borrow, BorrowEntity.class);
             borrowEntity.setBook(bookEntity);
             borrowEntity.setMember(memberEntity);
-
             borrowRepository.save(borrowEntity);
         } else {
             throw new IllegalStateException("Book is out of stock.");
         }
-
 
 
 //        System.out.println("Book ID: " + borrowEntity.getId());
@@ -92,19 +88,19 @@ public class BorrowServiceImpl implements BorrowService {
         if (borrow.getIssueDate() != null) {
             existingBorrowEntity.setIssueDate(borrow.getIssueDate());
         }
-
-        if (borrow.getDueDate() != null) {
-            existingBorrowEntity.setDueDate(borrow.getDueDate());
-        }
+//
+//        if (borrow.getDueDate() != null) {
+//            existingBorrowEntity.setDueDate(borrow.getDueDate());
+//        }
 
         if (borrow.getReturnDate() != null) {
             existingBorrowEntity.setReturnDate(borrow.getReturnDate());
         }
 
 
-        if (borrow.getFine() > 0) {
-            existingBorrowEntity.setFine(borrow.getFine());
-        }
+//        if (borrow.getFine() > 0) {
+//            existingBorrowEntity.setFine(borrow.getFine());
+//        }
 
 
         if (borrow.getBook() != null) {
@@ -128,15 +124,18 @@ public class BorrowServiceImpl implements BorrowService {
         BorrowEntity borrowEntity = borrowRepository.findById(borrowId)
                 .orElseThrow(() -> new IllegalArgumentException("Borrow record not found with ID: " + borrowId));
 
-
         BookEntity bookEntity = borrowEntity.getBook();
 
 
         bookEntity.setQty(bookEntity.getQty() + 1);
         repository.save(bookEntity);
 
-
         borrowEntity.setReturnDate(new Date());
         borrowRepository.save(borrowEntity);
+    }
+
+    @Override
+    public void deleteBorrow(Integer id) {
+        borrowRepository.deleteById(id);
     }
 }

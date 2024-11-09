@@ -11,4 +11,6 @@ public interface BorrowService {
     void updateBorrow(Borrow borrow);
     void returnBorrowBook(Integer borrowId);
 
+    void deleteBorrow(Integer id);
+
 }
