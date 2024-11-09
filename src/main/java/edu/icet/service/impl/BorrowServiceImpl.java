@@ -42,7 +42,6 @@ public class BorrowServiceImpl implements BorrowService {
             throw new IllegalArgumentException("Book and Member must be provided");
         }
 
-        // Fetch the Book and Member entities
         BookEntity bookEntity = repository.findById(borrow.getBook().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Book not found with ID: " + borrow.getBook().getId()));
 
@@ -54,7 +53,7 @@ public class BorrowServiceImpl implements BorrowService {
             bookEntity.setQty(bookEntity.getQty() - 1);
             repository.save(bookEntity);
 
-            // Map the Borrow DTO to BorrowEntity
+
             BorrowEntity borrowEntity = mapper.map(borrow, BorrowEntity.class);
             borrowEntity.setBook(bookEntity);
             borrowEntity.setMember(memberEntity);
