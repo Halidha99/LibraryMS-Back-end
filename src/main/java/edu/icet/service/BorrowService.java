@@ -13,4 +13,9 @@ public interface BorrowService {
 
     void deleteBorrow(Integer id);
 
+//    boolean markAsReturned(Integer borrowId);
+
+    String calculateOverdue(Integer borrowId);
+
+    boolean markAsReturned(Integer borrowId);
 }

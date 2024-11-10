@@ -16,8 +16,9 @@ public class Borrow {
         private Member member;
         private Date issueDate;
         private Date returnDate;
-//        private Date dueDate;
-//        private double fine;
+        private Date dueDate;
+        private boolean returned;
+        private double fine;
 
 
 

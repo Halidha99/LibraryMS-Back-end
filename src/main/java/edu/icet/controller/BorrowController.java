@@ -45,5 +45,25 @@ public class BorrowController {
         borrowService.deleteBorrow(id);
     }
 
+    @PutMapping("/borrow/mark-returned/{id}")
+    public ResponseEntity<Void> markReturned(@PathVariable Integer id) {
+        boolean isUpdated = borrowService.markAsReturned(id);
+        if (isUpdated) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 
-}
+
+
+    @GetMapping("/calculate-overdue/{borrowId}")
+    public ResponseEntity<String> calculateOverdue(@PathVariable Integer borrowId) {
+        String overdueStatus = borrowService.calculateOverdue(borrowId);
+        if ("Borrow record not found".equals(overdueStatus)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(overdueStatus);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(overdueStatus);
+
+
+    }
+    }

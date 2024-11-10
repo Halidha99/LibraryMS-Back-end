@@ -23,6 +23,8 @@ public class BookEntity {
     private String authorName;
     private String category;
     private Integer qty;
+    private boolean returned;
+
 
 //    @OneToMany(mappedBy = "book")
 //    private Set<BorrowEntity> borrowEntities;

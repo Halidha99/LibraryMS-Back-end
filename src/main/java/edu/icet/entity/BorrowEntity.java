@@ -34,9 +34,10 @@ public class BorrowEntity {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date returnDate;
 
-//    @Temporal(TemporalType.DATE)
-//    private Date dueDate;
-//
-//    private double fine;
+    @Temporal(TemporalType.DATE)
+    private Date dueDate;
+
+    private double fine;
+    private boolean isReturned;
 
 }
